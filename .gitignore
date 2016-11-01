@@ -3,5 +3,6 @@ build/
 .mvn/
 gradle/
 .idea/workspace.xml
+.DS_Store
 
 
