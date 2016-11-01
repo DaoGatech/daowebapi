@@ -14,10 +14,7 @@ import daowebapi.models.User;
 @RestController
 public class UserController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
-    @RequestMapping("/greeting")
+    @RequestMapping("/user")
     public User user() {
         return new User();
     }
