@@ -14,9 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadController {
 
     @RequestMapping(value="/upload", method= RequestMethod.POST)
-    public @ResponseBody
-    String handleFileUpload(
-            @RequestParam("file") MultipartFile file){
+
+    @ResponseBody
+
+    public String handleFileUpload(
+
+            @RequestParam("file") MultipartFile file) {
+
         String name = "test11";
         if (!file.isEmpty()) {
             try {
