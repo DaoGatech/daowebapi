@@ -16,12 +16,12 @@ public class UserController {
 
     @RequestMapping("/user")
     public User user() {
-        databaseController db = new databaseController();
+        System.out.println(System.getenv("CLEARDB_DATABASE_URL"));
         try {
-            Connection conn = db.getConnection();
-            System.console().writer().println(conn);
+            databaseController db = new databaseController();
+            db.getConnection();
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
         return new User();
     }

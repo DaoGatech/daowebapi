@@ -18,7 +18,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return System.getenv("CLEARDB_DATABASE_URL");
     }
 
     public String getAlias() {

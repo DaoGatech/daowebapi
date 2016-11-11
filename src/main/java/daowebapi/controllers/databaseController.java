@@ -13,6 +13,9 @@ public class databaseController {
 
     public static Connection getConnection() throws URISyntaxException, SQLException {
         URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+        System.out.println(System.getenv("CLEARDB_DATABASE_URL"));
+        System.out.println(dbUri.getUserInfo().split(":")[0]);
+        System.out.println(dbUri.getUserInfo().split(":")[1]);
 
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
