@@ -19,7 +19,7 @@ public class UserController {
         databaseController db = new databaseController();
         try {
             Connection conn = db.getConnection();
-            System.out.println(conn);
+            System.console().writer().println(conn);
         } catch (Exception e) {
 
         }
