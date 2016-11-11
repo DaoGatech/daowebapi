@@ -12,8 +12,8 @@ import java.sql.SQLException;
 public class databaseController {
 
     public static Connection getConnection() throws URISyntaxException, SQLException {
-        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
-        System.out.println(System.getenv("CLEARDB_DATABASE_URL"));
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+        System.out.println(System.getenv("DATABASE_URL"));
         System.out.println(dbUri.getUserInfo().split(":")[0]);
         System.out.println(dbUri.getUserInfo().split(":")[1]);
 
