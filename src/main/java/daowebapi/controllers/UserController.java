@@ -16,7 +16,7 @@ public class UserController {
 
     @RequestMapping("/user")
     public User user() {
-        System.out.println(System.getenv("CLEARDB_DATABASE_URL"));
+
         try {
             databaseController db = new databaseController();
             db.getConnection();
