@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class databaseController {
 
-    public static Connection getConnection() throws Exception {
+    public Connection getConnection() throws Exception {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];

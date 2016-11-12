@@ -15,7 +15,6 @@ public class User {
 
     private String username = "";
     private String alias = "";
-    private ArrayList<Image> images = new ArrayList<Image>();
     private Connection conn = null;
     private Statement stmt = null;
 
@@ -30,11 +29,6 @@ public class User {
                 this.alias = users.getString("alias");
             }
             users.close();
-            ResultSet img = stmt.executeQuery("SELECT * FROM images");
-            while(img.next()){
-                this.images.add(new Image(img.getString("url")));
-            }
-            img.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,6 +54,29 @@ public class User {
     }
 
     public ArrayList<Image> getImages() {
+        ArrayList<Image> images = new ArrayList<Image>();
+        try {
+            databaseController db = new databaseController();
+            conn = db.getConnection();
+            stmt = conn.createStatement();
+            ResultSet img = stmt.executeQuery("SELECT * FROM images");
+            while(img.next()){
+                images.add(new Image(img.getString("url")));
+            }
+            img.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(stmt!=null) conn.close();
+            }catch(Exception se){
+            }
+            try{
+                if(conn!=null) conn.close();
+            }catch(Exception se){
+                se.printStackTrace();
+            }
+        }
         return images;
     }
 }
