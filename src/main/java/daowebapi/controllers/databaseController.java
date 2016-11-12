@@ -11,16 +11,12 @@ import java.sql.SQLException;
  */
 public class databaseController {
 
-    public static Connection getConnection() throws URISyntaxException, SQLException {
+    public static Connection getConnection() throws Exception {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));
-        System.out.println(System.getenv("DATABASE_URL"));
-        System.out.println(dbUri.getUserInfo().split(":")[0]);
-        System.out.println(dbUri.getUserInfo().split(":")[1]);
-
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
-
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
         return DriverManager.getConnection(dbUrl, username, password);
     }
 }

@@ -19,9 +19,9 @@ public class UserController {
 
         try {
             databaseController db = new databaseController();
-            db.getConnection();
+            Connection conn = db.getConnection();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            //System.out.println("error " + e.getMessage());
         }
         return new User();
     }
