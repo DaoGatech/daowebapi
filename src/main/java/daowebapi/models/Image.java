@@ -6,11 +6,23 @@ package daowebapi.models;
 
 public class Image {
     private String url = "";
+    private String location = "";
 
-    public Image() {}
+    public Image(String url) {
+        this.url = url;
+    }
+
+    public Image(String url, String location) {
+        this.url = url;
+        this.location = location;
+    }
 
     public String getUrl() {
         return url;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
 }

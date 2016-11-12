@@ -24,13 +24,17 @@ public class User {
             databaseController db = new databaseController();
             conn = db.getConnection();
             stmt = conn.createStatement();
-            String sql = "SELECT * FROM user";
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                this.username  = rs.getString("username");
-                this.alias = rs.getString("alias");
+            ResultSet users = stmt.executeQuery("SELECT * FROM user");
+            while(users.next()){
+                this.username  = users.getString("username");
+                this.alias = users.getString("alias");
             }
-            rs.close();
+            users.close();
+            ResultSet img = stmt.executeQuery("SELECT * FROM images");
+            while(img.next()){
+                this.images.add(new Image(img.getString("url")));
+            }
+            img.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

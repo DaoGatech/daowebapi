@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fd9468c-1cba-4e28-8c89-afb24c2c3213" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daowebapi/controllers/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/daowebapi/controllers/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daowebapi/models/Image.java" afterPath="$PROJECT_DIR$/src/main/java/daowebapi/models/Image.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/daowebapi/models/User.java" afterPath="$PROJECT_DIR$/src/main/java/daowebapi/models/User.java" />
     </list>
     <ignored path="daowebapi.iws" />
@@ -65,12 +65,27 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/daowebapi/models/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            <state relative-caret-position="435">
+              <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1304#1305#0" expanded="true" />
-                <element signature="e#1335#1336#0" expanded="true" />
+                <element signature="e#1496#1497#0" expanded="true" />
+                <element signature="e#1527#1528#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Image.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/daowebapi/models/Image.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+              <folding>
+                <element signature="e#189#190#0" expanded="true" />
+                <element signature="e#219#220#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#454#455#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -472,6 +487,7 @@
         <option value="$PROJECT_DIR$/src/main/java/daowebapi/controllers/databaseController.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/daowebapi/controllers/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/daowebapi/models/Image.java" />
         <option value="$PROJECT_DIR$/src/main/java/daowebapi/models/User.java" />
       </list>
     </option>
@@ -1163,14 +1179,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/daowebapi/models/Image.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding>
+            <element signature="e#189#190#0" expanded="true" />
+            <element signature="e#219#220#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/daowebapi/models/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        <state relative-caret-position="435">
+          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1304#1305#0" expanded="true" />
-            <element signature="e#1335#1336#0" expanded="true" />
+            <element signature="e#1496#1497#0" expanded="true" />
+            <element signature="e#1527#1528#0" expanded="true" />
           </folding>
         </state>
       </provider>
