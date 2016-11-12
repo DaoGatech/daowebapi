@@ -14,15 +14,10 @@ import java.sql.Connection;
 @RestController
 public class UserController {
 
+    User current_user = new User();
+
     @RequestMapping("/user")
     public User user() {
-
-        try {
-            databaseController db = new databaseController();
-            Connection conn = db.getConnection();
-        } catch (Exception e) {
-            //System.out.println("error " + e.getMessage());
-        }
-        return new User();
+        return current_user;
     }
 }
