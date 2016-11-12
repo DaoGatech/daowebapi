@@ -1,4 +1,4 @@
-package daowebapi.controllers;
+package daowebapi.controllers.Album;
 
 /**
  * Created by tmizzle2005 on 11/1/16.
