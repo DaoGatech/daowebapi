@@ -61,7 +61,7 @@ public class User {
             stmt = conn.createStatement();
             ResultSet img = stmt.executeQuery("SELECT * FROM images");
             while(img.next()){
-                images.add(new Image(img.getString("url"),img.getString("location")));
+                images.add(new Image(img.getInt("id"),img.getString("url"),img.getString("location")));
             }
             img.close();
         } catch (Exception e) {
