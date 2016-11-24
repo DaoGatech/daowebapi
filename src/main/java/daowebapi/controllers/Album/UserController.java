@@ -16,13 +16,11 @@ public class UserController {
 
     private User current_user = new User();
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/user")
     public User user() {
         return current_user;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/user/images")
     public ArrayList<Image> images() {
         return current_user.getImages();
