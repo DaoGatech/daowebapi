@@ -18,5 +18,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowCredentials(false).maxAge(3600);
+        registry.addMapping("/**")
+                .allowedOrigins("https://daogatech.herokuapp.com/")
+                .allowCredentials(false).maxAge(3600);
     }
 }
