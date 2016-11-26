@@ -15,11 +15,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowCredentials(false).maxAge(3600);
-        registry.addMapping("/**")
-                .allowedOrigins("https://daogatech.herokuapp.com/")
+        registry.addMapping("*")
+                .allowedOrigins("*")
                 .allowCredentials(false).maxAge(3600);
     }
 }
