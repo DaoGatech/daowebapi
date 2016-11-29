@@ -79,4 +79,30 @@ public class User {
         }
         return images;
     }
+
+    public Image getImageById(int id) {
+        try {
+            databaseController db = new databaseController();
+            conn = db.getConnection();
+            stmt = conn.createStatement();
+            ResultSet img = stmt.executeQuery("SELECT * FROM images WHERE id = " + id);
+            while(img.next()){
+                return new Image(img.getInt("id"),img.getString("url"),img.getString("location"));
+            }
+            img.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                if(stmt!=null) conn.close();
+            }catch(Exception se){
+            }
+            try{
+                if(conn!=null) conn.close();
+            }catch(Exception se){
+                se.printStackTrace();
+            }
+        }
+        return null;
+    }
 }
