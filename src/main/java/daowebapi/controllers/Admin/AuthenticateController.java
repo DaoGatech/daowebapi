@@ -2,6 +2,7 @@ package daowebapi.controllers.Admin;
 
 import daowebapi.controllers.databaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class AuthenticateController {
     private Connection conn = null;
     private Statement stmt = null;
 
-    @RequestMapping(value="/authenticate")
+    @RequestMapping(value="/authenticate", method= RequestMethod.POST)
     public Status authenticate(@RequestParam("username") String username, @RequestParam("password") String password) {
         Status status = new Status();
         String encrypted_password = encrypt_to_SHA1(password);
