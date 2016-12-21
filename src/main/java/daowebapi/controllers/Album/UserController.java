@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import daowebapi.models.User;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.Bucket;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.AWSCredentials;
 
 @RestController
 public class UserController {
@@ -17,6 +23,7 @@ public class UserController {
 
     private HashMap<Integer,Image> map = new HashMap<>();
     @RequestMapping("/user")
+
     public User user() {
         return current_user;
     }
