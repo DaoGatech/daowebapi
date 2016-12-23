@@ -93,6 +93,7 @@ public class AdminController {
                         stmt.executeQuery("INSERT INTO images (url, location) VALUES ( " + url + ", " + location + ")");
                         status.setMessage("PASS");
                     } catch (Exception e) {
+                        status.setMessage(e.getMessage());
                         e.printStackTrace();
                     } finally {
                         try{
