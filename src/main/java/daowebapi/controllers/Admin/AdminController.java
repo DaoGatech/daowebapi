@@ -66,6 +66,7 @@ public class AdminController {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public @ResponseBody
     Status handleFileUpload(@RequestParam("location") String location,
+                            @RequestParam("description") String description,
                             @RequestParam("file") MultipartFile file) {
         Status status = new Status("FAIL");
         if (!file.isEmpty()) {
@@ -91,7 +92,7 @@ public class AdminController {
 
                         conn = db.getConnection();
                         stmt = conn.createStatement();
-                        stmt.executeUpdate("INSERT INTO images (url, location) VALUES ('" + url + "','" + location + "')");
+                        stmt.executeUpdate("INSERT INTO images (url, location, description) VALUES ('" + url + "','" + location + "','" + description + "')");
                         status.setMessage("PASS");
                     } catch (Exception e) {
                         status.setMessage(e.getMessage());
