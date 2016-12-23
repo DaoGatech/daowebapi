@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 
 
 @RestController
-public class AuthenticateController {
+public class AdminController {
 
     private Connection conn = null;
     private Statement stmt = null;
