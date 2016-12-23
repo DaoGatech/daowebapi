@@ -18,7 +18,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Formatter;
-import java.util.logging.Logger;
+import java.util.UUID;
 
 
 @RestController
@@ -80,17 +80,18 @@ public class AdminController {
 
                 if ((accessKey != null) && (secretKey != null)) {
                     AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+                    String uuid = UUID.randomUUID().toString();
                     amazonS3 = new AmazonS3Client(awsCredentials);
-                    amazonS3.putObject(new PutObjectRequest(s3Bucket, file.getName(),
+                    amazonS3.putObject(new PutObjectRequest(s3Bucket, uuid + ".png",
                             file.getInputStream(), objectMetadata)
                             .withCannedAcl(CannedAccessControlList.PublicRead));
-                    String url = "https://s3-us-west-2.amazonaws.com/" + s3Bucket + file.getName() + ".png";
+                    String url = "https://s3-us-west-2.amazonaws.com/" + s3Bucket + "/" + uuid + ".png";
                     try {
                         databaseController db = new databaseController();
 
                         conn = db.getConnection();
                         stmt = conn.createStatement();
-                        stmt.executeQuery("INSERT INTO images (url, location) VALUES ( " + url + ", " + location + ")");
+                        stmt.executeUpdate("INSERT INTO images (url, location) VALUES ('" + url + "','" + location + "')");
                         status.setMessage("PASS");
                     } catch (Exception e) {
                         status.setMessage(e.getMessage());
