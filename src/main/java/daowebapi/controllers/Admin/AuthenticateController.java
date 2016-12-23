@@ -1,10 +1,15 @@
 package daowebapi.controllers.Admin;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import daowebapi.controllers.databaseController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -13,16 +18,17 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Formatter;
+import java.util.logging.Logger;
 
 
-/**
- * Created by tmizzle2005 on 12/8/16.
- */
 @RestController
 public class AuthenticateController {
 
     private Connection conn = null;
     private Statement stmt = null;
+    public static AmazonS3 amazonS3;
+    public static String s3Bucket;
+
 
     @RequestMapping(value="/authenticate", method= RequestMethod.POST)
     public Status authenticate(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -56,6 +62,58 @@ public class AuthenticateController {
         return status;
     }
 
+
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public @ResponseBody
+    Status handleFileUpload(@RequestParam("location") String location,
+                            @RequestParam("file") MultipartFile file) {
+        Status status = new Status("FAIL");
+        if (!file.isEmpty()) {
+            try {
+                ObjectMetadata objectMetadata = new ObjectMetadata();
+                objectMetadata.setContentType(file.getContentType());
+
+                // Upload the file for public read
+                String accessKey = System.getenv("AWS_ACCESS_KEY");
+                String secretKey = System.getenv("AWS_SECRET_KEY");
+                s3Bucket = System.getenv("AWS_S3_BUCKET");
+
+                if ((accessKey != null) && (secretKey != null)) {
+                    AWSCredentials awsCredentials = new BasicAWSCredentials(accessKey, secretKey);
+                    amazonS3 = new AmazonS3Client(awsCredentials);
+                    amazonS3.putObject(new PutObjectRequest(s3Bucket, file.getName(),
+                            file.getInputStream(), objectMetadata)
+                            .withCannedAcl(CannedAccessControlList.PublicRead));
+                    String url = "https://s3-us-west-2.amazonaws.com/" + s3Bucket + file.getName() + ".png";
+                    try {
+                        databaseController db = new databaseController();
+
+                        conn = db.getConnection();
+                        stmt = conn.createStatement();
+                        stmt.executeQuery("INSERT INTO images (url, location) VALUES ( " + url + ", " + location + ")");
+                        status.setMessage("PASS");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try{
+                            if(stmt!=null) conn.close();
+                        }catch(Exception se){
+                        }
+                        try{
+                            if(conn!=null) conn.close();
+                        }catch(Exception se){
+                            se.printStackTrace();
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                status.setMessage(e.getMessage());
+            }
+        }
+        return status;
+    }
+
     private static String encrypt_to_SHA1(String password)  {
         String sha1 = "";
         try {
@@ -83,9 +141,6 @@ public class AuthenticateController {
         return result;
     }
 
-    /**
-     * Created by tmizzle2005 on 12/8/16.
-     */
     static class Status {
 
         private String message = "FAIL";
