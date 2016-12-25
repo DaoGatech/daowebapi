@@ -59,7 +59,7 @@ public class User {
             databaseController db = new databaseController();
             conn = db.getConnection();
             stmt = conn.createStatement();
-            ResultSet img = stmt.executeQuery("SELECT * FROM images");
+            ResultSet img = stmt.executeQuery("SELECT * FROM images ORDER BY id DESC");
             while(img.next()){
                 images.add(new Image(img.getInt("id"),img.getString("url"),img.getString("location")));
             }
