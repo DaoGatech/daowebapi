@@ -61,7 +61,8 @@ public class User {
             stmt = conn.createStatement();
             ResultSet img = stmt.executeQuery("SELECT * FROM images ORDER BY id DESC");
             while(img.next()){
-                images.add(new Image(img.getInt("id"),img.getString("url"),img.getString("location")));
+                images.add(new Image(img.getInt("id"),img.getString("url"),img.getString("location"),
+                        img.getString("description")));
             }
             img.close();
         } catch (Exception e) {
@@ -87,7 +88,8 @@ public class User {
             stmt = conn.createStatement();
             ResultSet img = stmt.executeQuery("SELECT * FROM images WHERE id = " + id);
             while(img.next()){
-                return new Image(img.getInt("id"),img.getString("url"),img.getString("location"));
+                return new Image(img.getInt("id"),img.getString("url"),img.getString("location"),
+                        img.getString("description"));
             }
             img.close();
         } catch (Exception e) {
