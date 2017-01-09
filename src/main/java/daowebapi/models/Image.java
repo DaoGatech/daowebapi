@@ -1,5 +1,7 @@
 package daowebapi.models;
 
+import java.sql.Date;
+
 /**
  * Created by tmizzle2005 on 10/31/16.
  */
@@ -9,13 +11,13 @@ public class Image {
     private String location = "";
     private int id = 0;
     private String description = "";
-    private String dateposted = "";
+    private Date dateposted;
 
     public Image(String url) {
         this.url = url;
     }
 
-    public Image(int id, String url, String location, String description, String dateposted) {
+    public Image(int id, String url, String location, String description, Date dateposted) {
         this.id = id;
         this.url = url;
         this.location = location;
@@ -35,6 +37,6 @@ public class Image {
 
     public String getDescription() {return description; }
 
-    public String getdatePosted() {return dateposted; }
+    public String getdatePosted() { return dateposted.toString(); }
 
 }

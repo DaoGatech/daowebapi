@@ -62,7 +62,7 @@ public class User {
             ResultSet img = stmt.executeQuery("SELECT * FROM images ORDER BY dateposted DESC");
             while(img.next()){
                 images.add(new Image(img.getInt("id"),img.getString("url"),img.getString("location"),
-                        img.getString("description"), img.getString("dateposted")));
+                        img.getString("description"), img.getDate("dateposted")));
             }
             img.close();
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class User {
             ResultSet img = stmt.executeQuery("SELECT * FROM images WHERE id = " + id);
             while(img.next()){
                 return new Image(img.getInt("id"),img.getString("url"),img.getString("location"),
-                        img.getString("description"), img.getString("dateposted"));
+                        img.getString("description"), img.getDate("dateposted"));
             }
             img.close();
         } catch (Exception e) {
