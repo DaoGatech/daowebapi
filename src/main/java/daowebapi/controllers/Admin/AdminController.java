@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import daowebapi.controllers.databaseController;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Formatter;
 import java.util.UUID;
 
@@ -67,6 +69,7 @@ public class AdminController {
     public @ResponseBody
     Status handleFileUpload(@RequestParam("location") String location,
                             @RequestParam("description") String description,
+                            @RequestParam(value="dateposted") @DateTimeFormat(pattern="yyyy-mm-dd") Date datePosted,
                             @RequestParam("file") MultipartFile file) {
         Status status = new Status("FAIL");
         if (!file.isEmpty()) {
@@ -92,7 +95,9 @@ public class AdminController {
 
                         conn = db.getConnection();
                         stmt = conn.createStatement();
-                        stmt.executeUpdate("INSERT INTO images (url, location, description) VALUES ('" + url + "','" + location + "','" + description + "')");
+                        stmt.executeUpdate("INSERT INTO images (url, location, description, dateposted) " +
+                                "VALUES ('" + url + "','" + location + "','" +
+                                description + "','" + datePosted.toString() + "')");
                         status.setMessage("PASS");
                     } catch (Exception e) {
                         status.setMessage(e.getMessage());

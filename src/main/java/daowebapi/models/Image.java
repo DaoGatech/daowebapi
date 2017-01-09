@@ -31,8 +31,6 @@ public class Image {
         return location;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description; }
 
 }
