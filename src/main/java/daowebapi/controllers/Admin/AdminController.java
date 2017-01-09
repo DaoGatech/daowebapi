@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.UUID;
@@ -95,9 +96,10 @@ public class AdminController {
 
                         conn = db.getConnection();
                         stmt = conn.createStatement();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                         stmt.executeUpdate("INSERT INTO images (url, location, description, dateposted) " +
                                 "VALUES ('" + url + "','" + location + "','" +
-                                description + "','" + datePosted.toString() + "')");
+                                description + "','" + formatter.format(datePosted) + "')");
                         status.setMessage("PASS");
                     } catch (Exception e) {
                         status.setMessage(e.getMessage());
